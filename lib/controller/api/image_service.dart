@@ -6,12 +6,10 @@ class ImageService {
   static const String apikey = '43430374-567e4be09acb5f2a72a39357f';
   static const String baseUrl = 'https://pixabay.com/api/';
 
-  int pagenumber = 1;
 
   Future<List<Map<String, dynamic>>> getImages() async {
     final response = await http.get(Uri.parse("$baseUrl?key=$apikey"));
     if (response.statusCode == 200) {
-      pagenumber++;
       final Map<String, dynamic> data = json.decode(response.body);
       return List<Map<String, dynamic>>.from(data['hits']);
     } else {
